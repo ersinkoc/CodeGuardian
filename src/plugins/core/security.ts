@@ -377,6 +377,7 @@ export function securityPlugin(
                   const isSecurityContext =
                     fileText.includes('token') ||
                     fileText.includes('secret') ||
+                    // codeguardian-disable-next-line security/hardcoded-secret -- detection keyword, not a real secret
                     fileText.includes('password') ||
                     fileText.includes('hash') ||
                     fileText.includes('crypto') ||
