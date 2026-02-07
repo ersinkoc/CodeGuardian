@@ -7,6 +7,7 @@ Unlike traditional linters that check syntax, codeguardian builds a **knowledge 
 ## Features
 
 - **Codebase Knowledge Graph** — Maps all files, symbols, imports, and dependencies
+- **ESM & CommonJS Support** — Correctly resolves `.js`/`.ts` import extensions
 - **Incremental Analysis** — Only re-parses changed files (< 2s pre-commit)
 - **29 Built-in Rules** — Architecture, security, performance, and quality checks
 - **Plugin System** — Extend with custom rules and plugins
@@ -128,7 +129,7 @@ Create `.codeguardian.json` in your project root:
 ### Performance (7 rules)
 | Rule | Severity | Description |
 |------|----------|-------------|
-| `performance/n1-query` | warning | Database calls inside loops |
+| `performance/n1-query` | warning | Database calls (find, query, execute) inside loops |
 | `performance/sync-in-async` | warning | readFileSync in async functions |
 | `performance/memory-leak-risk` | warning | addEventListener without cleanup |
 | `performance/unbounded-query` | warning | Queries without LIMIT |
@@ -140,7 +141,7 @@ Create `.codeguardian.json` in your project root:
 | Rule | Severity | Description |
 |------|----------|-------------|
 | `quality/cyclomatic-complexity` | warning | Functions exceeding complexity limit |
-| `quality/dead-code` | warning | Exported symbols never imported |
+| `quality/dead-code` | warning | Exported symbols never imported (supports ESM `.js` imports) |
 | `quality/any-type` | warning | Usage of `any` type |
 | `quality/no-error-handling` | warning | Async functions without try-catch |
 | `quality/inconsistent-naming` | info | Non-camelCase function names |
