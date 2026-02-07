@@ -1,0 +1,73 @@
+# @oxog/codeguardian
+
+> Zero-dependency TypeScript codebase guardian. Pre-commit hook that enforces architecture, security, performance, and quality rules.
+
+## Install
+
+npm install @oxog/codeguardian --save-dev
+npx codeguardian init
+
+## Basic Usage
+
+// In .codeguardian.json
+{
+  "plugins": {
+    "architecture": { "enabled": true },
+    "security": { "enabled": true },
+    "performance": { "enabled": true },
+    "quality": { "enabled": true }
+  }
+}
+
+// Programmatic
+import { createGuardian } from '@oxog/codeguardian';
+const guardian = createGuardian({ rootDir: '.' });
+const result = await guardian.run({ staged: true });
+
+## API Summary
+
+### Guardian
+- `createGuardian(config)` - Create instance
+- `guardian.scan()` - Full codebase scan
+- `guardian.scanIncremental()` - Scan changed files only
+- `guardian.run(options)` - Run analysis
+- `guardian.graph` - Access codebase knowledge graph
+
+### Rules
+- `defineRule({ name, severity, check })` - Create custom rule
+- `definePlugin({ name, install })` - Create custom plugin
+
+### CLI
+- `codeguardian init` - Setup project
+- `codeguardian run` - Analyze all files
+- `codeguardian run --staged` - Analyze staged files
+- `codeguardian stats` - Show graph statistics
+- `codeguardian rules` - List all rules
+
+## Core Plugins
+- `architecture` - Layer violations, circular deps, god files
+- `security` - SQL injection, hardcoded secrets, eval, XSS
+- `performance` - N+1 queries, memory leaks, sync operations
+- `quality` - Complexity, dead code, any type, naming
+
+## Common Patterns
+
+### Custom Rule
+import { defineRule } from '@oxog/codeguardian';
+const rule = defineRule({
+  name: 'no-console',
+  severity: 'warning',
+  category: 'quality',
+  description: 'No console.log',
+  check: (ctx) => { /* return Finding[] */ },
+});
+
+### Severity Config
+{ "severity": { "blockOn": ["critical", "error"], "warnOn": ["warning"] } }
+
+### Inline Suppression
+// codeguardian-disable-next-line security/sql-injection
+
+## Links
+- Docs: https://codeguardian.oxog.dev
+- GitHub: https://github.com/ersinkoc/codeguardian

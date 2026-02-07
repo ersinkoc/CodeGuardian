@@ -1,0 +1,8 @@
+node_modules/
+dist/
+/coverage/
+.codeguardian/
+.claude/
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
