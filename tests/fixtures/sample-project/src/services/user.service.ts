@@ -1,3 +1,5 @@
+import { capitalize } from '../utils/helpers';
+
 export class UserService {
   async getUser(id: string): Promise<{ id: string; name: string }> {
     return { id, name: 'Test User' };

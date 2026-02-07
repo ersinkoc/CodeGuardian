@@ -229,8 +229,13 @@ function resolveImportPath(
   const fromDir = path.dirname(fromFile);
   let resolved = path.posix.join(fromDir, importSource);
 
-  // Try common extensions
-  if (!resolved.endsWith('.ts') && !resolved.endsWith('.tsx') && !resolved.endsWith('.js')) {
+  // Handle .js/.jsx -> .ts/.tsx mapping (ESM moduleResolution: NodeNext)
+  if (resolved.endsWith('.js')) {
+    resolved = resolved.slice(0, -3) + '.ts';
+  /* v8 ignore next 2 */
+  } else if (resolved.endsWith('.jsx')) {
+    resolved = resolved.slice(0, -4) + '.tsx';
+  } else if (!resolved.endsWith('.ts') && !resolved.endsWith('.tsx')) {
     resolved = resolved + '.ts';
   }
 

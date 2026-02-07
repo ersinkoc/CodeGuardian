@@ -251,7 +251,12 @@ function resolveImport(fromFile: string, source: string): string {
     else if (part !== '.') resolved.push(part);
   }
   let result = resolved.join('/');
-  if (!result.endsWith('.ts') && !result.endsWith('.tsx')) {
+  if (result.endsWith('.js')) {
+    result = result.slice(0, -3) + '.ts';
+  /* v8 ignore next 2 */
+  } else if (result.endsWith('.jsx')) {
+    result = result.slice(0, -4) + '.tsx';
+  } else if (!result.endsWith('.ts') && !result.endsWith('.tsx')) {
     result += '.ts';
   }
   return result;

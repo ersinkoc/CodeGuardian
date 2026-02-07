@@ -1,7 +1,7 @@
 import ts from 'typescript';
 import type { Finding, GuardianPlugin, PerformancePluginConfig, RuleContext } from '../../types.js';
 
-const DB_CALL_PATTERNS = ['find', 'findOne', 'findAll', 'findById', 'query', 'execute', 'fetch', 'get', 'select'];
+const DB_CALL_PATTERNS = ['find', 'findOne', 'findAll', 'findById', 'query', 'execute', 'fetch', 'select'];
 const SYNC_FS_METHODS = ['readFileSync', 'writeFileSync', 'appendFileSync', 'mkdirSync', 'readdirSync', 'statSync', 'existsSync', 'unlinkSync', 'copyFileSync'];
 
 /**
